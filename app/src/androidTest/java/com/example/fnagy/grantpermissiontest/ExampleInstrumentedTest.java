@@ -1,6 +1,7 @@
 package com.example.fnagy.grantpermissiontest;
 
 import android.Manifest;
+import android.content.pm.PackageManager;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -35,7 +36,8 @@ public class ExampleInstrumentedTest {
                 Manifest.permission.READ_EXTERNAL_STORAGE);
 
         File file = new File("/storage/emulated/0/test.file");
-        Log.i("TEST", "permission: " + permission + ", exists " + file.exists());
+        Assert.assertEquals(PackageManager.PERMISSION_GRANTED, permission);
+        Assert.assertTrue(file.exists());
 
         try (FileInputStream input = new FileInputStream(file)) {
             int i = 0;
